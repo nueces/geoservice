@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  # PostgreSQL with PostGIS extensions
+  db:
+    volumes:
+     - pg_data:/var/lib/postgresql/data
+
+  django:
+    command: bash -c "python3 manage.py migrate ; python3 manage.py collectstatic --noinput ; /usr/local/bin/gunicorn geoservice.wsgi:application -t 60 -w 2 --reload -b :8000"
+    environment:
+      - DEBUG = False
+      - DJANGO_SUPERUSER_PASSWORD=ag7kai7Iepam
+    volumes:
+      - media:/srv/media
+      - static:/srv/static
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+      - media:/srv/media
+      - static:/srv/static
+    depends_on:
+      - django
+
+volumes:
+    pg_data:
+    media:
+    static:
+
+

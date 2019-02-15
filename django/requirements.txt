@@ -6,3 +6,4 @@ djangorestframework
 djangorestframework-gis
 coreapi
 pyyaml
+gunicorn

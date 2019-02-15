@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  # PostgreSQL with PostGIS extensions
+  db:
+    image: mdillon/postgis
+    restart: always
+
+  # Django web server
+  django:
+    build:
+      context: ./django
+    command: bash -c "python manage.py migrate ; python manage.py runserver 0.0.0.0:8000;"
+    environment:
+      - DEBUG = True
+      - DJANGO_SUPERUSER_NAME=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@admin.net
+      - DJANGO_SUPERUSER_PASSWORD=admin
+    ports:
+      - "8000:8000"
+    depends_on:
+        - db
+    volumes:
+      - ./django:/django

@@ -3,4 +3,6 @@ pytz==2018.9
 psycopg2-binary
 django-money
 djangorestframework
+djangorestframework-gis
 coreapi
+pyyaml

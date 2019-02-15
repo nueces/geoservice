@@ -11,11 +11,20 @@ class User(AbstractUser):
     phone = models.CharField(
                 max_length=30,
                 )
-    language = models.CharField(max_length=7, choices=settings.LANGUAGES)
-    currency = CurrencyField(default='USD', choices=CURRENCIES)
+    language = models.CharField(
+                    max_length=7,
+                    choices=settings.LANGUAGES)
+    currency = CurrencyField(
+                    default='USD',
+                    choices=CURRENCIES)
 
+    class Meta:
+        ordering = ('date_joined',)
 
 class Area(models.Model):
+    created = models.DateTimeField(
+                auto_now_add=True,
+                )
     name = models.CharField(
                 max_length=100,
                 )
@@ -31,6 +40,9 @@ class Area(models.Model):
                 on_delete=models.CASCADE,
                 )
     area = models.MultiPolygonField()
+
+    class Meta:
+        ordering = ('created','name')
 
     def __str__(self):
         return self.name

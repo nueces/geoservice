@@ -24,7 +24,7 @@ class ProvidersUserChangeForm(UserChangeForm):
 
 class ProvidersUserAdmin(UserAdmin):
     form = ProvidersUserChangeForm
-    custom_fielsets = {'Personal info': {'fields': ('phone', 'languague', 'currency')}}
+    custom_fielsets = {'Personal info': {'fields': ('phone', 'language', 'currency')}}
 
     fieldsets = update_fieldsets(UserAdmin.fieldsets, custom_fielsets)
 

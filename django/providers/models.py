@@ -11,7 +11,7 @@ class User(AbstractUser):
     phone = models.CharField(
                 max_length=30,
                 )
-    languague = models.CharField(max_length=7, choices=settings.LANGUAGES)
+    language = models.CharField(max_length=7, choices=settings.LANGUAGES)
     currency = CurrencyField(default='USD', choices=CURRENCIES)
 
 
